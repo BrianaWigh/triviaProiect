@@ -53,7 +53,7 @@ class TriviaGame:
             self.root.after(1500, self.load_question)
         else:
             self.root.after(1500, self.show_final_score)
-def show_final_score(self):
+    def show_final_score(self):
         for widget in self.root.winfo_children():
             widget.destroy()
         final = f"Scor final: {self.score} din {len(questions)}"
