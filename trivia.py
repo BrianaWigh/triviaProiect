@@ -92,26 +92,28 @@ class TriviaGame:
             btn.pack(pady=5)
 
 
-    
+    #verifica daca raspunsul selectat este corect
     def check_answer(self, selected):
-        correct = questions[self.current]["answer"]
+        correct = questions[self.current]["answer"] #obtine raspunsul corect de la intrebarea curenta
         if selected == correct:
-            self.result_label.config(text=" Corect!", fg="green")
-            self.score += 1
+            self.result_label.config(text=" Corect!", fg="green") #daca raspunsul este corect se afiseaza mesajul corect cu verde
+            self.score += 1 #plus se mareste scorul
         else:
-            self.result_label.config(text=f" Greșit! Răspuns corect: {correct}", fg="red")
+            self.result_label.config(text=f" Greșit! Răspuns corect: {correct}", fg="red") #daca raspusul este gresit apare cu rosu
 
-        self.current += 1
-        if self.current < len(questions):
+        self.current += 1 #trecem la urmatoarea intrebare
+        if self.current < len(questions): #daca mai sunt intrebari le incarca dupa 1.5 secunde
             self.root.after(1500, self.load_question)
         else:
-            self.root.after(1500, self.show_final_score)
+            self.root.after(1500, self.show_final_score) #daca nu, se afiseaza scorul final in functie de raspunsurile corecte/gresite
+    #metoda show_final_score se ocupa de afisarea scorului final
     def show_final_score(self):
+        #elimina toate elementele de pe fereastra
         for widget in self.root.winfo_children():
             widget.destroy()
-        final = f"Scor final: {self.score} din {len(questions)}"
-        tk.Label(self.root, text=final, font=("Arial", 20)).pack(pady=50)
+        final = f"Scor final: {self.score} din {len(questions)}" #afisarea mesajului cu scor final
+        tk.Label(self.root, text=final, font=("Arial", 20)).pack(pady=50) #afisare cor final
 
-root = tk.Tk()
+root = tk.Tk() #am initializat fereastra principala tkinter
 app = TriviaGame(root)
 root.mainloop()
