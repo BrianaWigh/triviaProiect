@@ -40,3 +40,25 @@ class TriviaGame:
             btn = tk.Button(self.buttons_frame, text=choice, font=("Arial", 12), width=20,
                             command=lambda c=choice: self.check_answer(c))
             btn.pack(pady=5)
+    def check_answer(self, selected):
+        correct = questions[self.current]["answer"]
+        if selected == correct:
+            self.result_label.config(text=" Corect!", fg="green")
+            self.score += 1
+        else:
+            self.result_label.config(text=f" Greșit! Răspuns corect: {correct}", fg="red")
+
+        self.current += 1
+        if self.current < len(questions):
+            self.root.after(1500, self.load_question)
+        else:
+            self.root.after(1500, self.show_final_score
+def show_final_score(self):
+        for widget in self.root.winfo_children():
+            widget.destroy()
+        final = f"Scor final: {self.score} din {len(questions)}"
+        tk.Label(self.root, text=final, font=("Arial", 20)).pack(pady=50)
+
+root = tk.Tk()
+app = TriviaGame(root)
+root.mainloop()
